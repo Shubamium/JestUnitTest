@@ -74,4 +74,25 @@ describe("Summation", () => {
 
   // Add .todo to add a passing with no implementation yet
   test.todo("Remove user");
+
+  // Custom Matchers
+  expect.extend({
+    toBeFunnyNumber(received) {
+      if (received === 420 || received === 69) {
+        return {
+          pass: true,
+        };
+      } else {
+        return {
+          pass: false,
+          message: `Expected ${received} to be a funny number`,
+        };
+      }
+    },
+  });
+
+  // Test the custom matchers
+  test("Sum total is a funny number", () => {
+    expect(sum(400, 20)).toBeFunnyNumber();
+  });
 });
